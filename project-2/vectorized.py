@@ -29,7 +29,7 @@ def generate_mandelbrot_set_vectorized(x_min: float, x_max: float, y_min: float,
 
 if __name__ == "__main__":
     from visualization import plot_mandelbrot_set
-    from measurements import load_measurements, save_measurements
+    from measurements import save_measurements
     import timeit
 
     # Define parameters for the Mandelbrot set generation.
