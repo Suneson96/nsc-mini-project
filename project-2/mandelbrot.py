@@ -1,6 +1,7 @@
 import numpy as np
 
-def generate_mandelbrot_set_vectorized(x_min: float, x_max: float, y_min: float, y_max: float, width: int, height: int, max_iterations: int) -> np.ndarray:
+def generate_mandelbrot_set_vectorized(x_min: float, x_max: float, y_min: float, y_max: float,
+                                       width: int, height: int, max_iterations: int) -> np.ndarray:
 
     # Create a 2D array of complex numbers representing the points in the complex plane.
     real = np.linspace(x_min, x_max, width)
@@ -21,5 +22,5 @@ def generate_mandelbrot_set_vectorized(x_min: float, x_max: float, y_min: float,
         z[mask] = z[mask] * z[mask] + c[mask]  # Update z for those points.
         mandelbrot_set[mask] = n  # Update the iteration count for those points.
 
-    # Return interation counts for each complex number.
+    # Return iteration counts for each complex number.
     return mandelbrot_set
