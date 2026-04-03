@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def generate_mandelbrot_set_vectorized(x_min: float, x_max: float, y_min: float, y_max: float,
                                        width: int, height: int, max_iterations: int) -> np.ndarray:
 
@@ -25,8 +26,10 @@ def generate_mandelbrot_set_vectorized(x_min: float, x_max: float, y_min: float,
     # Return iteration counts for each complex number.
     return mandelbrot_set
 
+
 if __name__ == "__main__":
     from visualization import plot_mandelbrot_set
+    from measurements import load_measurements, save_measurements
     import timeit
 
     # Define parameters for the Mandelbrot set generation.
@@ -40,6 +43,9 @@ if __name__ == "__main__":
     elapsed = timeit.timeit(lambda: generate_mandelbrot_set_vectorized(x_min, x_max, y_min, y_max,
                                                       width, height, max_iterations), number=5) / 5
     print(f"Average time taken to generate Mandelbrot set (vectorized): {elapsed:.2f} seconds")
+
+    # Save the measurement to a CSV file for later analysis.
+    save_measurements("vectorized", elapsed)
 
     # Visualize the Mandelbrot set.
     mandelbrot_set = generate_mandelbrot_set_vectorized(x_min, x_max, y_min, y_max,
