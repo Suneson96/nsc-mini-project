@@ -24,3 +24,24 @@ def generate_mandelbrot_set_vectorized(x_min: float, x_max: float, y_min: float,
 
     # Return iteration counts for each complex number.
     return mandelbrot_set
+
+if __name__ == "__main__":
+    from visualization import plot_mandelbrot_set
+    import timeit
+
+    # Define parameters for the Mandelbrot set generation.
+    x_min, x_max = -2.0, 1.0
+    y_min, y_max = -1.5, 1.5
+    width, height = 1024, 1024
+    max_iterations = 100
+
+    # Measure the time taken to generate the Mandelbrot set using the vectorized approach.
+    # Averaging over 5 runs for better accuracy.
+    elapsed = timeit.timeit(lambda: generate_mandelbrot_set_vectorized(x_min, x_max, y_min, y_max,
+                                                      width, height, max_iterations), number=5) / 5
+    print(f"Average time taken to generate Mandelbrot set (vectorized): {elapsed:.2f} seconds")
+
+    # Visualize the Mandelbrot set.
+    mandelbrot_set = generate_mandelbrot_set_vectorized(x_min, x_max, y_min, y_max,
+                                                      width, height, max_iterations)
+    plot_mandelbrot_set(mandelbrot_set, x_min, x_max, y_min, y_max, title="Mandelbrot Set - Vectorized Approach")
