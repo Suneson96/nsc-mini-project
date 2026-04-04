@@ -30,3 +30,18 @@ def visualize_parallel_measurements(measurements: pd.DataFrame):
     os.makedirs("plots", exist_ok=True)
     plt.savefig("plots/parallel_measurements.png")
     plt.close()
+
+def visualize_dask_local_measurements(measurements: pd.DataFrame):
+    # Filter measurements for the Dask local approach.
+    dask_local_measurements = measurements[measurements["approach"] == "dask_local"]
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(dask_local_measurements["chunk_size"], dask_local_measurements["time_seconds"], marker="o")
+    plt.title("Time taken for Dask Local Mandelbrot Set Generation")
+    plt.xlabel("Chunk Size")
+    plt.ylabel("Time (seconds)")
+
+    # Save the plot to a file.
+    os.makedirs("plots", exist_ok=True)
+    plt.savefig("plots/dask_local_measurements.png")
+    plt.close()
