@@ -1,0 +1,163 @@
+2026-04-06 519c7b7 Add pdf
+
+ project-2/Mini-Project 2.pdf | Bin 0 -> 894378 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+2026-04-06 587aae5 Add dask distributed solution
+
+ project-2/csv/measurements.csv                     |   6 ++
+ project-2/dask_distributed.py                      |  76 +++++++++++++++++++++
+ project-2/plots/dask_distributed_measurements.png  | Bin 0 -> 30829 bytes
+ .../mandelbrot_set___dask_distributed_approach.png | Bin 0 -> 67416 bytes
+ .../speedup_dask_distributed_vs_vectorized.png     | Bin 0 -> 35412 bytes
+ project-2/requirements.txt                         |  12 ++++
+ project-2/visualization.py                         |  33 +++++++++
+ 7 files changed, 127 insertions(+)
+2026-04-06 2d9ab23 Cleanup dask local and add speedup
+
+ project-2/csv/measurements.csv                      |   6 ++++++
+ project-2/dask_local.py                             |  16 +++++++---------
+ project-2/plots/dask_local_measurements.png         | Bin 27038 -> 25916 bytes
+ .../plots/speedup_dask_local_vs_vectorized.png      | Bin 0 -> 36259 bytes
+ project-2/visualization.py                          |  20 +++++++++++++++++++-
+ 5 files changed, 32 insertions(+), 10 deletions(-)
+2026-04-06 e2eb4e5 Cleanup parallel implementation and add speedup
+
+ project-2/csv/measurements.csv                     | 181 +++------------------
+ project-2/parallel.py                              |  45 ++---
+ project-2/plots/dask_local_measurements.png        | Bin 27202 -> 27038 bytes
+ .../plots/mandelbrot_set___parallel_approach.png   | Bin 66893 -> 66448 bytes
+ project-2/plots/parallel_measurements.png          | Bin 55698 -> 42867 bytes
+ project-2/plots/speedup_parallel_vs_vectorized.png | Bin 0 -> 60721 bytes
+ project-2/visualization.py                         |  19 +++
+ 7 files changed, 67 insertions(+), 178 deletions(-)
+2026-04-04 3f5e48e Add dask local approach
+
+ project-2/csv/measurements.csv                     | 306 +++++++++++----------
+ project-2/dask_local.py                            |  58 ++++
+ project-2/plots/dask_local_measurements.png        | Bin 0 -> 27202 bytes
+ .../plots/mandelbrot_set___dask_local_approach.png | Bin 0 -> 66834 bytes
+ project-2/requirements.txt                         |   8 +
+ project-2/visualization.py                         |  15 +
+ 6 files changed, 237 insertions(+), 150 deletions(-)
+2026-04-03 dc01a96 Add visualization for parallel approach
+
+ project-2/csv/measurements.csv                     | 162 +++++++++++++++++++--
+ project-2/parallel.py                              |  35 +++--
+ .../plots/mandelbrot_set___parallel_approach.png   | Bin 66658 -> 66893 bytes
+ project-2/plots/parallel_measurements.png          | Bin 0 -> 55698 bytes
+ project-2/visualization.py                         |  20 ++-
+ 5 files changed, 192 insertions(+), 25 deletions(-)
+2026-04-03 d5cf17b Add parallel approach and update measurement module for processes and batch_size
+
+ project-2/csv/measurements.csv                     |  15 ++++-
+ project-2/measurements.py                          |  16 ++++--
+ project-2/parallel.py                              |  62 +++++++++++++++++++++
+ .../plots/mandelbrot_set___parallel_approach.png   | Bin 0 -> 66658 bytes
+ project-2/vectorized.py                            |   2 +-
+ 5 files changed, 87 insertions(+), 8 deletions(-)
+2026-04-03 e9b856f Add requirements and write measurements to CSV
+
+ project-2/csv/measurements.csv                     |   2 ++
+ project-2/measurements.py                          |  26 +++++++++++++++++++++
+ .../plots/mandelbrot_set___vectorized_approach.png | Bin 0 -> 67084 bytes
+ project-2/requirements.txt                         |  12 ++++++++++
+ project-2/vectorized.py                            |   6 +++++
+ 5 files changed, 46 insertions(+)
+2026-04-03 09b6986 Rename vectorized module and add main call
+
+ project-2/{mandelbrot.py => vectorized.py} | 23 ++++++++++++++++++++++-
+ project-2/visualization.py                 | 14 ++++++++++++++
+ 2 files changed, 36 insertions(+), 1 deletion(-)
+2026-04-03 1d565da Clean up vectorize mandlebrot function
+
+ project-2/mandelbrot.py | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+2026-04-03 3b51521 Add vectorized mandelbrot generation from mini-project 1
+
+ project-2/mandelbrot.py | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+2026-03-13 743cf84 Update pdf to the delivered
+
+ module_1.pdf => project/module_1.pdf | Bin
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+2026-03-11 76f513a Compile csv results into 1 file
+
+ module_1.pdf                               | Bin 533129 -> 529955 bytes
+ project/mandelbrot_scalability_results.csv |   6 ++
+ project/module_1.html                      | 118 +++++++++++++----------------
+ project/module_1.ipynb                     | 118 +++++++++++++----------------
+ 4 files changed, 112 insertions(+), 130 deletions(-)
+2026-03-11 7ada2e2 Update text
+
+ project/module_1.ipynb | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+2026-03-11 46fe782 Complete and export to html and pdf
+
+ module_1.pdf           |  Bin 0 -> 533129 bytes
+ project/module_1.html  | 8517 ++++++++++++++++++++++++++++++++++++++++++++++++
+ project/module_1.ipynb |   20 +-
+ 3 files changed, 8532 insertions(+), 5 deletions(-)
+2026-03-11 6ab9a7e Export results as csv
+
+ project/mandelbrot_scalability_results_jit.csv     |  6 +++
+ project/mandelbrot_scalability_results_naive.csv   |  6 +++
+ .../mandelbrot_scalability_results_vectorized.csv  |  6 +++
+ project/module_1.ipynb                             | 51 +++++++++++++++++++++-
+ 4 files changed, 68 insertions(+), 1 deletion(-)
+2026-03-11 c9200c0 Add scaling analysis
+
+ project/module_1.ipynb | 172 ++++++++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 155 insertions(+), 17 deletions(-)
+2026-03-11 d7eab51 Merge changes
+
+ exercises/exercise_1_2.ipynb |  62 ++++
+ project/module_1.ipynb       | 846 +++++++++++++++++++++----------------------
+ 2 files changed, 485 insertions(+), 423 deletions(-)
+2026-03-11 d3113e4 Add performance analysis
+
+ project/module_1.ipynb | 119 +++++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 100 insertions(+), 19 deletions(-)
+2026-03-09 4bee999 Add JIT approach
+
+ project/module_1.ipynb   | 126 ++++++++++++++++++++++++++++++++++++++++++-----
+ project/requirements.txt |  28 +++++++++++
+ 2 files changed, 143 insertions(+), 11 deletions(-)
+2026-03-09 7986a7b Add vectorized approach and update comments and text
+
+ project/module_1.ipynb | 104 ++++++++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 95 insertions(+), 9 deletions(-)
+2026-03-09 be94e6f Add problem context and align parameters to moodle description
+
+ project/module_1.ipynb | 73 +++++++++++++++++++++++++++++++++++++++++++-------
+ 1 file changed, 63 insertions(+), 10 deletions(-)
+2026-03-06 7bb6e26 Implement naive generation of the mandelbrot set
+
+ requirements.txt => exercises/requirements.txt |   0
+ project/module_1.ipynb                         | 102 +++++++++++++++++++++++++
+ project/requirements.txt                       |  12 +++
+ 3 files changed, 114 insertions(+)
+2026-02-23 0fd8950 Add monte carlo exercise
+
+ exercises/monte_carlo_pi.ipynb | 121 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 121 insertions(+)
+2026-02-23 f02ef30 update requirements
+
+ requirements.txt | 39 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
+2026-02-23 fd7875f Add exercise 1 1
+
+ exercises/exercise_1_1.ipynb | 115 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 115 insertions(+)
+2026-02-23 a59533c update readme
+
+ README.md | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+2026-02-23 5e1bb65 add requirements.txt
+
+ requirements.txt | 1 +
+ 1 file changed, 1 insertion(+)
+2026-02-23 4a0a91f Initial commit
+
+ .gitignore | 207 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ README.md  |   2 +
+ 2 files changed, 209 insertions(+)
