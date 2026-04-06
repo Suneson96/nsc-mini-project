@@ -15,20 +15,17 @@ def _mandelbrot_block(c_block: np.ndarray, max_iterations: int = 100) -> np.ndar
 def generate_mandelbrot_set_dask_local(x_min: float, x_max: float, y_min: float, y_max: float,
                                 width: int, height: int, max_iterations: int, chunk_size: int) -> np.ndarray:
 
-    # Build the complex number grid using NumPy meshgrid.
-    real = np.linspace(x_min, x_max, width)
-    imag = np.linspace(y_min, y_max, height)
-    R, I = np.meshgrid(real, imag)
-    c = R + 1j * I
-
-    # Convert to a chunked dask array and apply the per-block computation via map_blocks.
-    c_dask = da.from_array(c, chunks=(chunk_size, chunk_size))
+    # Build the complex number grid as a native chunked Dask array.
+    real = da.linspace(x_min, x_max, width, chunks=chunk_size)
+    imag = da.linspace(y_min, y_max, height, chunks=chunk_size)
+    R, I = da.meshgrid(real, imag)
+    c_dask = R + 1j * I
     result = c_dask.map_blocks(_mandelbrot_block, dtype=int, max_iterations=max_iterations)
 
     return result.compute()
 
 if __name__ == "__main__":
-    from visualization import plot_mandelbrot_set, visualize_dask_local_measurements
+    from visualization import plot_mandelbrot_set, visualize_dask_local_measurements, visualize_dask_local_speedup
     from measurements import save_measurements, load_measurements
     import timeit
 
@@ -51,6 +48,7 @@ if __name__ == "__main__":
     # Load the measurements and visualize the results.
     measurements = load_measurements()
     visualize_dask_local_measurements(measurements)
+    visualize_dask_local_speedup(measurements)
 
     # Visualize the Mandelbrot set.
     mandelbrot_set = generate_mandelbrot_set_dask_local(x_min, x_max, y_min, y_max,

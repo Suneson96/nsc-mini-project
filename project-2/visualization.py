@@ -64,3 +64,21 @@ def visualize_parallel_speedup(measurements: pd.DataFrame):
     os.makedirs("plots", exist_ok=True)
     plt.savefig("plots/speedup_parallel_vs_vectorized.png")
     plt.close()
+
+def visualize_dask_local_speedup(measurements: pd.DataFrame):
+    # Filter measurements for the Dask local and vectorized approaches.
+    dask_local_measurements = measurements[measurements["approach"] == "dask_local"]
+    vectorized_measurements = measurements[measurements["approach"] == "vectorized"]
+
+    plt.figure(figsize=(10, 6))
+    speedup = vectorized_measurements["time_seconds"].values[0] / dask_local_measurements["time_seconds"]
+    plt.plot(dask_local_measurements["chunk_size"], speedup, marker="o", label="Dask Local")
+    plt.title("Speedup of Dask Local Approach Compared to Vectorized Approach")
+    plt.xlabel("Chunk Size")
+    plt.ylabel("Speedup")
+    plt.legend()
+
+    # Save the plot to a file.
+    os.makedirs("plots", exist_ok=True)
+    plt.savefig("plots/speedup_dask_local_vs_vectorized.png")
+    plt.close()
