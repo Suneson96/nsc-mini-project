@@ -46,6 +46,21 @@ def visualize_dask_local_measurements(measurements: pd.DataFrame):
     plt.savefig("plots/dask_local_measurements.png")
     plt.close()
 
+def visualize_dask_distributed_measurements(measurements: pd.DataFrame):
+    # Filter measurements for the Dask distributed approach.
+    dask_distributed_measurements = measurements[measurements["approach"] == "dask_distributed"]
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(dask_distributed_measurements["chunk_size"], dask_distributed_measurements["time_seconds"], marker="o")
+    plt.title("Time taken for Dask Distributed Mandelbrot Set Generation")
+    plt.xlabel("Chunk Size")
+    plt.ylabel("Time (seconds)")
+
+    # Save the plot to a file.
+    os.makedirs("plots", exist_ok=True)
+    plt.savefig("plots/dask_distributed_measurements.png")
+    plt.close()
+
 def visualize_parallel_speedup(measurements: pd.DataFrame):
     # Filter measurements for the parallel and vectorized approaches.
     parallel_measurements = measurements[measurements["approach"] == "parallel"]
@@ -81,4 +96,22 @@ def visualize_dask_local_speedup(measurements: pd.DataFrame):
     # Save the plot to a file.
     os.makedirs("plots", exist_ok=True)
     plt.savefig("plots/speedup_dask_local_vs_vectorized.png")
+    plt.close()
+
+def visualize_dask_distributed_speedup(measurements: pd.DataFrame):
+    # Filter measurements for the Dask distributed and vectorized approaches.
+    dask_distributed_measurements = measurements[measurements["approach"] == "dask_distributed"]
+    vectorized_measurements = measurements[measurements["approach"] == "vectorized"]
+
+    plt.figure(figsize=(10, 6))
+    speedup = vectorized_measurements["time_seconds"].values[0] / dask_distributed_measurements["time_seconds"]
+    plt.plot(dask_distributed_measurements["chunk_size"], speedup, marker="o", label="Dask Distributed")
+    plt.title("Speedup of Dask Distributed Approach Compared to Vectorized Approach")
+    plt.xlabel("Chunk Size")
+    plt.ylabel("Speedup")
+    plt.legend()
+
+    # Save the plot to a file.
+    os.makedirs("plots", exist_ok=True)
+    plt.savefig("plots/speedup_dask_distributed_vs_vectorized.png")
     plt.close()
