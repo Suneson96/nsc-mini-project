@@ -47,24 +47,24 @@ def generate_mandelbrot_set_cuda(x_min: float, x_max: float, y_min: float, y_max
     return output, elapsed
 
 if __name__ == "__main__":
+    from measurements import save_measurements
+    from visualization import plot_mandelbrot_set
 
     # Define parameters for the Mandelbrot set generation.
     x_min, x_max = -2.0, 1.0
     y_min, y_max = -1.5, 1.5
-    width, height = 1024, 1024
+    scales = [256, 512, 1024, 2048]
     max_iterations = 100
-    num_runs = 5
 
-    # Warm-up run (Not part of the timed runs).
-    generate_mandelbrot_set_cuda(x_min, x_max, y_min, y_max, width, height, max_iterations)
+    # Warm-up run and visualize the Mandelbrot set (not part of the timed runs).
+    mandelbrot_set, _ = generate_mandelbrot_set_cuda(x_min, x_max, y_min, y_max, scales[-1], scales[-1], max_iterations)
+    plot_mandelbrot_set(mandelbrot_set, x_min, x_max, y_min, y_max, title=f"Mandelbrot Set - CUDA Approach (Scale: {scales[-1]}x{scales[-1]})")
 
-    times = []
-    for _ in range(num_runs):
-        result, elapsed = generate_mandelbrot_set_cuda(
-            x_min, x_max, y_min, y_max, width, height, max_iterations
-        )
-        times.append(elapsed)
+    # Measure time at different scales.
+    for scale in scales:
 
-    avg_total = sum(times) / num_runs
-
-    print(f" Average time: {avg_total:.4f} s")
+        for _ in range(10):
+            output, elapsed = generate_mandelbrot_set_cuda(x_min, x_max, y_min, y_max,
+                                                          scale, scale, max_iterations)
+            print(f"Time taken to generate Mandelbrot set (CUDA) with scale {scale}: {elapsed:.2f} seconds")
+            save_measurements("cuda", scale, elapsed)
