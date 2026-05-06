@@ -95,15 +95,33 @@ def generate_mandelbrot_set_vectorized(x_min: float, x_max: float, y_min: float,
 
 if __name__ == "__main__":
     import timeit
+    from visualization import plot_mandelbrot_set
+    from measurements import save_measurements
 
     # Define parameters for the Mandelbrot set generation.
     x_min, x_max = -2.0, 1.0
     y_min, y_max = -1.5, 1.5
-    width, height = 1024, 1024
+    scales = [256, 512, 1024, 2048]
     max_iterations = 100
 
-    # Measure the time taken to generate the Mandelbrot set using the vectorized approach.
-    # Averaging over 5 runs for better accuracy.
-    elapsed = timeit.timeit(lambda: generate_mandelbrot_set_vectorized(x_min, x_max, y_min, y_max,
-                                                      width, height, max_iterations), number=5) / 5
-    print(f"Average time taken to generate Mandelbrot set (vectorized): {elapsed:.2f} seconds")
+    # Measure the time taken to generate the Mandelbrot set using the naive approach and the vectorized approach for different scales.
+    for scale in scales:
+
+        # capture each approach 10 times and store each run in measurements for later analysis.
+        for _ in range(10):
+            elapsed = timeit.timeit(lambda: generate_mandelbrot_set_naive(x_min, x_max, y_min, y_max,
+                                                                scale, scale, max_iterations), number=1)
+            save_measurements("naive", scale, elapsed)
+        
+        for _ in range(10):
+            elapsed = timeit.timeit(lambda: generate_mandelbrot_set_vectorized(x_min, x_max, y_min, y_max,
+                                                                scale, scale, max_iterations), number=1)
+            save_measurements("vectorized", scale, elapsed)
+
+    # Visualize the Mandelbrot set for the largest scale using the naive approach.
+    mandelbrot_set = generate_mandelbrot_set_naive(x_min, x_max, y_min, y_max, scales[-1], scales[-1], max_iterations)
+    plot_mandelbrot_set(mandelbrot_set, x_min, x_max, y_min, y_max, title=f"Mandelbrot Set - Naive Approach (Scale: {scales[-1]}x{scales[-1]})")
+
+    # Visualize the Mandelbrot set for the largest scale using the vectorized approach.
+    mandelbrot_set = generate_mandelbrot_set_vectorized(x_min, x_max, y_min, y_max, scales[-1], scales[-1], max_iterations)
+    plot_mandelbrot_set(mandelbrot_set, x_min, x_max, y_min, y_max, title=f"Mandelbrot Set - Vectorized Approach (Scale: {scales[-1]}x{scales[-1]})")
